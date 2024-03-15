@@ -25,8 +25,6 @@ class Generate:
 
             # If response_format is provided and is a Pydantic model, add it to the payload
             if response_format is not None:
-                if not isinstance(response_format, BaseModel):
-                    raise ValueError("response_format must be a Pydantic model")
                 json_schema = response_format.model_json_schema()
                 payload["response_format"] = json_schema
 

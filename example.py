@@ -10,17 +10,13 @@ class ResponseFormat(BaseModel):
     weather: float
 
 
-response_format = ResponseFormat(
-    city="New York", neighborhood="Manhattan", weather=72.5
-)
-
 text = nux.parse(
     ["https://nux-sandbox.s3.us-east-2.amazonaws.com/marketing/ethan-resume.pdf"]
 )
 
 output = nux.generate.openai.chat(
     model="gpt-3.5-turbo",
-    response_format=response_format,
+    response_format=ResponseFormat,
     context=f"Given this context, answer X. | context",
 )
 
