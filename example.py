@@ -18,11 +18,10 @@ text = nux.parse(
     ["https://nux-sandbox.s3.us-east-2.amazonaws.com/marketing/ethan-resume.pdf"]
 )
 
-# output = nux.generate.openai.chat(
-#     model="gpt-3.5-turbo",
-#     response_format=response_format,
-#     context=f"Given this context, answer X. | context",
-# )
+output = nux.generate.openai.chat(
+    model="gpt-3.5-turbo",
+    response_format=response_format,
+    context=f"Given this context, answer X. | context",
+)
 
-
-print(text)
+print(output)

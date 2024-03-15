@@ -6,12 +6,12 @@ from .generate import Generate
 
 class NUX:
     def __init__(self, api_key):
-        self.base_url = "http://localhost:8000"
+        self.base_url = "http://127.0.0.1:8000"
         self.headers = {
             "Authorization": f"Bearer {api_key}",
             "Content-Type": "application/json",
         }
-        self.generate = Generate()
+        self.generate = Generate(self.base_url, self.headers)
 
     def _send_post(self, url, payload):
         return requests.post(url, headers=self.headers, data=json.dumps(payload)).json()
