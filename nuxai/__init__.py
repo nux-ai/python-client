@@ -6,7 +6,7 @@ from .generate import Generate
 
 class NUX:
     def __init__(self, api_key):
-        self.base_url = "https://api.nux.ai"
+        self.base_url = "http://localhost:8000"
         self.headers = {
             "Authorization": f"Bearer {api_key}",
             "Content-Type": "application/json",
@@ -14,15 +14,13 @@ class NUX:
         self.generate = Generate()
 
     def _send_post(self, url, payload):
-        request_url = f"{self.base_url}{url}"
-        return requests.get(request_url, headers=self.headers, data=payload).json()
+        return requests.post(url, headers=self.headers, data=json.dumps(payload)).json()
 
     def _send_get(self, url):
-        request_url = f"{self.base_url}{url}"
-        return requests.get(request_url, headers=self.headers).json()
+        return requests.get(url, headers=self.headers).json()
 
-    def parse(self, modality="text", file_urls=[]):
-        parse_url = f"{self.base_url}/parse"
+    def parse(self, file_urls=[]):
+        parse_url = f"{self.base_url}/parse/text"
         if len(file_urls) == 1:
             data = {"file_urls": file_urls[0]}
         else:
