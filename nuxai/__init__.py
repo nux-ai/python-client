@@ -1,8 +1,7 @@
 import requests
 import json
 
-from generate import Generate
-from index import Index
+from .generate import Generate
 
 
 class NUX:
@@ -12,8 +11,7 @@ class NUX:
             "Authorization": f"Bearer {api_key}",
             "Content-Type": "application/json",
         }
-        self.index = self.Index()
-        self.generate = self.Generate()
+        self.generate = Generate()
 
     def _send_post(self, url, payload):
         request_url = f"{self.base_url}{url}"
@@ -24,7 +22,7 @@ class NUX:
         return requests.get(request_url, headers=self.headers).json()
 
     def parse(self, modality="text", file_urls=[]):
-        parse_url = f"{self.base_url}/parse/{modality}"
+        parse_url = f"{self.base_url}/parse"
         if len(file_urls) == 1:
             data = {"file_urls": file_urls[0]}
         else:
